@@ -12,7 +12,11 @@ class MyString:
         return self.value.endswith('!')
 
     def count_sentences(self):
-        sentences = re.split(r'[.!?]', self.value)
-        # Filter out empty strings and whitespace-only strings
-        sentences = [s.strip() for s in sentences if s.strip()]
+        sentences = [s.strip() for s in self.value.split('.') if s.strip()]
+        sentences += [s.strip() for s in self.value.split('?') if s.strip()]
+        sentences += [s.strip() for s in self.value.split('!') if s.strip()]
+
+        if not isinstance(self.value, str):
+            print("The value must be a string.")
+
         return len(sentences)
